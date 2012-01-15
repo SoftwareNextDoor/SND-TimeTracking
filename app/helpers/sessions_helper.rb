@@ -27,7 +27,7 @@ module SessionsHelper
   end
 
   def authenticateSF
-
+    puts "authenticateSF url params = '#{request.fullpath}' "
     #set default values
     auth_params = nil
     provider = ENV['DEFAULT_PROVIDER']
@@ -55,7 +55,10 @@ module SessionsHelper
     end
 
     auth_params = URI.escape(auth_params.collect{|k,v| "#{k}=#{v}"}.join('&'))
+    
     redirect_to "/auth/#{provider}?#{auth_params}"
+
+
   end
 
   def deny_access
