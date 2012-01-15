@@ -15,7 +15,7 @@ SndTimetracking::Application.configure do
   ENV['SALESFORCE_CUSTOM_SECRET'] = "9136150013852850068"
 
   ENV['DEFAULT_PROVIDER'] = "customurl"
-  ENV['DEFAULT_CUSTOM_URL'] = "https://test.salesforce.com" #do not add trailing slash
+  ENV['DEFAULT_CUSTOM_URL'] = "https://login.salesforce.com" #do not add trailing slash
   ENV['app_timeout'] = '5' #seconds
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
