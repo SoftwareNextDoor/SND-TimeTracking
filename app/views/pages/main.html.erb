@@ -1,0 +1,16 @@
+<div class="template">
+  Welcome <span class="name"></span> to <span class="site"></span>! 
+</div>
+
+<script>
+  var jsonData = {
+    who: 'Foo',
+    site: 'http://sndtimetrack.com'
+    };
+    //select the template
+    $('div.template')
+      //tell PURE what to do
+      .directives({ 'span.name':'who', 'span.site':'site' })
+      //generate the HTML
+      .render(jsonData)
+</script>
