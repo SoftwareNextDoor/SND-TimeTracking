@@ -2,6 +2,11 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.3'
 
+gem 'omniauth'
+gem 'omniauth-salesforce', :git => 'git://github.com/jonathansnd/omniauth-salesforce.git'
+gem 'databasedotcom'
+gem 'httparty'
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -31,6 +36,11 @@ group :test, :development do
   gem 'guard-rspec'
   gem "spork"
 end
+
+group :production do
+  #gem "pg"
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

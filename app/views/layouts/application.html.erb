@@ -7,7 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<div>
+      <% if signed_in? %>
+          <ul class="nav secondary-nav">
+            <li>
+              <%= link_to "Sign Out", signout_path %>
+            </li>
+          </ul>
+      <% else %>
+          <ul class="nav secondary-nav">
+            <li>
+              <%= link_to "Sign In", sign_in_path %>
+            </li>
+          </ul>
+      <% end %>
+</div>
 <%= yield %>
 
 </body>

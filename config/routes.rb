@@ -55,4 +55,16 @@ SndTimetracking::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+
+  resources :sessions, :only => [:new,:create,:destroy]
+
+  match '/signin',  :to => 'sessions#authenticateSF'
+  match '/signout',  :to => 'sessions#destroy'
+  match '/signoutsf',  :to => 'sessions#signout_revoke'
+  match '/signoutexp', :to => 'sessions#signout_exp'
+
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#fail'
+
+  root :to => 'pages#home'
 end

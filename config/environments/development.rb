@@ -1,6 +1,22 @@
 SndTimetracking::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  #You setup these in Setup > Development > Remote Access
+  #Set your callback url to https://localhost:3000/auth/forcedotcom/callback
+  ENV['SALESFORCE_KEY'] = "3MVG9yZ.WNe6byQAutDXMv6gpuoJgJRJb0pT7TpcuWAJ9fIQniWMbfayySPOMwpzqGWFj3JI135mXwQEEwDzY"
+  ENV['SALESFORCE_SECRET'] = "9136150013852850068"
+  ENV['SALESFORCE_SANDBOX_KEY'] = ""
+  ENV['SALESFORCE_SANDBOX_SECRET'] = ""
+  ENV['SALESFORCE_PRERELEASE_KEY'] = ""
+  ENV['SALESFORCE_PRERELEASE_SECRET'] = ""
+  ENV['DATABASE_DOT_COM_KEY'] = ""
+  ENV['DATABASE_DOT_COM_SECRET'] = ""
+  ENV['SALESFORCE_CUSTOM_KEY'] = ""
+  ENV['SALESFORCE_CUSTOM_SECRET'] = ""
+
+  ENV['DEFAULT_PROVIDER'] = "customurl"
+  ENV['DEFAULT_CUSTOM_URL'] = "" #do not add trailing slash
+  ENV['app_timeout'] = '5' #seconds
   # In the development environment your application's code is reloaded on
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
