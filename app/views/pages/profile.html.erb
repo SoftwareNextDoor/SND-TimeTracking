@@ -1,0 +1,37 @@
+
+<h1><%= session[:name] %></h1>
+
+<div>
+	<table>
+		<tr>
+			<td>
+				<%= image_tag(session[:image], :alt => session[:name], :style => "border-radius:10px;")%>
+			</td>
+
+			<td>
+				<h2><%= @me.status["body"]["text"] %></h2>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<h1>Authentication Info</h1>
+
+<div>
+
+	<table class="tInfo">
+		<tr>
+			<td>User ID : </td><td><%= session[:user_id] %></td>
+		</tr>
+		<tr>
+			<td>Organization ID : </td><td> <%= session[:org_id] %></td>
+		</tr>
+		<tr>
+			<td>Instance URL : </td><td> <%= session[:auth_hash][:instance_url] %></td>
+		</tr>
+		<tr>
+			<td>OAuth Token : </td><td> <%= session[:auth_hash][:token] %></td>
+		</tr>		
+	</table>
+
+</div>

@@ -1,28 +1,108 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SndTimetracking</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application", "pure_min" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div>
-      <% if signed_in? %>
-          <ul class="nav secondary-nav">
-            <li>
-              <%= link_to "Sign Out", signout_path %>
-            </li>
-          </ul>
-      <% else %>
-          <ul class="nav secondary-nav">
-            <li>
-              <%= link_to "Sign In", signin_path %>
-            </li>
-          </ul>
-      <% end %>
-</div>
-<%= yield %>
 
-</body>
+  <head>
+
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <%= csrf_meta_tag %>
+    <%= render 'layouts/stylesheets' %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'jquery.js' %>
+    <%= javascript_include_tag 'jquery.idletimer.js' %>
+    <%= javascript_include_tag 'jquery.idletimeout.js' %>
+    <%= javascript_include_tag 'bootstrap-alerts.js' %>
+    <%= javascript_include_tag 'bootstrap-atwipsy.js' %>
+    <%= javascript_include_tag 'bootstrap-buttons.js' %>
+    <%= javascript_include_tag 'bootstrap-dropdown.js' %>
+    <%= javascript_include_tag 'bootstrap-modal.js' %>
+    <%= javascript_include_tag 'bootstrap-popover.js' %>
+
+  </head>
+
+  <style>
+    #idletimeout{
+      padding:10px;
+      position:relative;
+      top:0px;
+      left:0;
+      right:0;
+      z-index:100000;
+      display:none;
+    }
+  </style>
+
+  <body style="padding-top: 40px;">
+
+    <%= render 'layouts/header' %>
+
+    <div id="appContainer">
+
+      
+      <div class="container">
+
+        <div class="row">
+
+          <div class="span16">
+
+            <div id="idletimeout" class="alert-message">
+              You will be logged off in <span><!-- countdown place holder --></span>&nbsp;seconds due to inactivity. 
+              <a id="idletimeout-resume" href="#">Click here to continue using this web page</a>.
+            </div>
+
+            <% flash.each do |key, value| %>
+            <div class="alert-message <%= key %>"><%= value.html_safe %></div>
+            
+            <% end %>
+                      
+            <%= yield %>
+
+            <%= render 'layouts/footer' %>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+      if(<%= signed_in? %>){
+
+        var j$ = jQuery.noConflict();
+        var autosaveOn = false;
+        var idleTime = new Date();
+        var refreshIntervalId;
+        var timeout = <%= ENV['app_timeout'] %>;
+        
+
+        j$.idleTimeout('#idletimeout', '#idletimeout a', {
+          idleAfter: timeout,
+          pollingInterval: 2,
+          //keepAliveURL: 'keepalive.php',
+          //serverResponseEquals: 'OK',
+          warningLength: 30,
+          onTimeout: function(){
+            j$(this).slideUp();
+            window.location = "/signoutexp";
+            //location.reload();
+          },
+          onIdle: function(){
+            j$(this).slideDown(); // show the warning bar
+          },
+          onCountdown: function( counter ){
+            j$(this).find("span").html( counter ); // update the counter
+          },
+          onResume: function(){
+            j$(this).slideUp(); // hide the warning bar
+          }
+        });
+      }
+      
+    </script>
+
+  </body>
+
 </html>

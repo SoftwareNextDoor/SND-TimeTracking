@@ -1,7 +1,7 @@
 require 'httparty'
 
 class SessionsController < ApplicationController
-
+  
   include HTTParty
 
   def new
