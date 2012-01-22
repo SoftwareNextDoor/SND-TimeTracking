@@ -47,14 +47,19 @@ module SessionsHelper
       auth_params = {
         :display => params[:options]['display'],
         :immediate => params[:options]['immediate'],
-        :scope => params[:options].to_a.flatten.select{|v| v.start_with? "scope|"}.collect!{|v| v.sub(/scope\|/,"")}.join(" ")
+        :scope => params[:options].to_a.flatten.select{|v| v.start_with? "scope|"}.collect!{|v| v.sub(/scope\|/,"")}.join(" "),
+        :CSRF_token => params[:options]['CSRF']
       }
       if params[:options]['provider']=='customurl'
         auth_params[:customurl] = params[:options]['curl']
       end
     end
 
+    
     auth_params = URI.escape(auth_params.collect{|k,v| "#{k}=#{v}"}.join('&'))
+
+    puts " &&&&&&&&&&&&&&& auth_params = '#{auth_params}' "
+
     redirect_to "/auth/#{provider}?#{auth_params}"
   end
 

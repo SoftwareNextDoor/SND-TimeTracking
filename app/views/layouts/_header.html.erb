@@ -28,9 +28,11 @@
 	          <a href="#" class="close">×</a>
 	          <h3>Authentication Settings</h3>
 	        </div>
+	        <%= form_authenticity_token %>
 
 	        <div class="modal-body">
 		        <form action='/signin' id='authenticate_form' method='post' name='authenticate_form'>
+		        		<input type="hidden" name="options[CSRF]" value="<%= form_authenticity_token%>"/>
 		            <div data-role='fieldcontain' style="align:center;">
 		                <h4>Environment</h4>
 		                <input id='options[provider]-1' name='options[provider]' type='radio' value='salesforce' >
