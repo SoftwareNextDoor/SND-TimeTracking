@@ -47,8 +47,8 @@ module SessionsHelper
       auth_params = {
         :display => params[:options]['display'],
         :immediate => params[:options]['immediate'],
-        :scope => params[:options].to_a.flatten.select{|v| v.start_with? "scope|"}.collect!{|v| v.sub(/scope\|/,"")}.join(" "),
-        :CSRF_token => params[:options]['CSRF']
+        :scope => params[:options].to_a.flatten.select{|v| v.start_with? "scope|"}.collect!{|v| v.sub(/scope\|/,"")}.join(" ")
+        #:authenticity_token => params[:options]['authenticity_token']
       }
       if params[:options]['provider']=='customurl'
         auth_params[:customurl] = params[:options]['curl']
